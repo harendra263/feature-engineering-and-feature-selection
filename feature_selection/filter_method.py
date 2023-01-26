@@ -110,7 +110,7 @@ def chi_square_test(X,y,select_k=10):
     
 
 def univariate_roc_auc(X_train,y_train,X_test,y_test,threshold):
-   
+
     """
     First, it builds one decision tree per feature, to predict the target
     Second, it makes predictions using the decision tree and the mentioned feature
@@ -127,13 +127,15 @@ def univariate_roc_auc(X_train,y_train,X_test,y_test,threshold):
     roc_values = pd.Series(roc_values)
     roc_values.index = X_train.columns
     print(roc_values.sort_values(ascending=False))
-    print(len(roc_values[roc_values > threshold]),'out of the %s featues are kept'% len(X_train.columns))
-    keep_col = roc_values[roc_values > threshold]
-    return keep_col
+    print(
+        len(roc_values[roc_values > threshold]),
+        f'out of the {len(X_train.columns)} featues are kept',
+    )
+    return roc_values[roc_values > threshold]
         
         
 def univariate_mse(X_train,y_train,X_test,y_test,threshold):
-   
+
     """
     First, it builds one decision tree per feature, to predict the target
     Second, it makes predictions using the decision tree and the mentioned feature
@@ -150,7 +152,9 @@ def univariate_mse(X_train,y_train,X_test,y_test,threshold):
     mse_values = pd.Series(mse_values)
     mse_values.index = X_train.columns
     print(mse_values.sort_values(ascending=False))
-    print(len(mse_values[mse_values > threshold]),'out of the %s featues are kept'% len(X_train.columns))
-    keep_col = mse_values[mse_values > threshold]
-    return keep_col        
+    print(
+        len(mse_values[mse_values > threshold]),
+        f'out of the {len(X_train.columns)} featues are kept',
+    )
+    return mse_values[mse_values > threshold]        
         
